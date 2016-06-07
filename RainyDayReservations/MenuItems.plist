@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Caption</key>
+		<string>Book a Flight</string>
+		<key>Action</key>
+		<integer>0</integer>
+		<key>Photo</key>
+		<string>BookFlight</string>
+		<key>Active</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>Caption</key>
+		<string>View Reservations</string>
+		<key>Action</key>
+		<integer>1</integer>
+		<key>Photo</key>
+		<string>ChangeFlight</string>
+		<key>Active</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>Caption</key>
+		<string>Travelers</string>
+		<key>Action</key>
+		<integer>2</integer>
+		<key>Photo</key>
+		<string>Travelers</string>
+		<key>Active</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>Caption</key>
+		<string>Agent Access</string>
+		<key>Action</key>
+		<integer>3</integer>
+		<key>Photo</key>
+		<string>Gear</string>
+		<key>Active</key>
+		<integer>1</integer>
+	</dict>
+</array>
+</plist>
