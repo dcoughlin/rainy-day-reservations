@@ -489,7 +489,7 @@ class Model {
     // Reservation Record Type
     let reservationQuery = CKQuery(recordType: ReservationRecordType, predicate: tempPredicate)
     publicDB.performQuery(reservationQuery, inZoneWithID: nil) {
-      results, error in
+      _, error in
       if error != nil {
         let ckErrorCode = CKErrorCode(rawValue: error!.code)!
         if ckErrorCode == .UnknownItem {
@@ -509,7 +509,7 @@ class Model {
     let flightPredicate = NSPredicate(format: "FlightDuration != 0.0")  //-- Don't use true predicate, since recordID is not queryable by default
     let flightQuery = CKQuery(recordType: FlightRecordType, predicate: flightPredicate)
     publicDB.performQuery(flightQuery, inZoneWithID: nil) {
-      results, error in
+      _, error in
       if error != nil {
         let ckErrorCode = CKErrorCode(rawValue: error!.code)!
         if ckErrorCode == .UnknownItem {
