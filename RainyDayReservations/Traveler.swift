@@ -17,7 +17,7 @@ class Traveler : Equatable {
   
   var name: String
   var age: Int
-  var primary: Bool
+  var isPrimary: Bool
   var photo: UIImage?
  
   var record : CKRecord
@@ -29,7 +29,7 @@ class Traveler : Equatable {
     
     self.name = record["Name"] as? String ?? ""
     self.age = record["Age"] as? Int ?? 0
-    self.primary = record["Primary"] as? Bool ?? false
+    self.isPrimary = record["Primary"] as? Bool ?? false
     self.photo = record["Photo"] as? UIImage ?? UIImage(named: Traveler.UnknownPhotoName)
   }
   
@@ -53,7 +53,7 @@ class Traveler : Equatable {
   func updateTravelerRecordWithUserID(userID : CKRecordID) {
     self.record["Name"] = self.name
     self.record["Age"] = self.age
-    self.record["Primary"] = self.primary ? 1 : 0
+    self.record["Primary"] = self.isPrimary ? 1 : 0
     self.record["User"] = CKReference(recordID: userID, action: .None)
     
     if self.photo != nil {
@@ -67,7 +67,7 @@ class Traveler : Equatable {
 
 extension Traveler: CustomStringConvertible {
   var description : String {
-    return "Traveler:\(name) Age:\(age) Primary Travler:\(primary ? "YES" : "NO")"
+    return "Traveler:\(name) Age:\(age) Primary Travler:\(isPrimary ? "YES" : "NO")"
   }
 }
 

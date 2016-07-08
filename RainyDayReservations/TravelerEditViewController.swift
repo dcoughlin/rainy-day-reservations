@@ -43,7 +43,7 @@ class TravelerEditViewController : UITableViewController, UINavigationController
     
     travelerNameText.text = traveler.name
     travelerAgeText.text = String(traveler.age) ?? "0"
-    travelerPrimarySwitch.on = traveler.primary
+    travelerPrimarySwitch.on = traveler.isPrimary
     
     travelerPhoto.circleWithBorderWidth(1.25)
     if let travelerImage = traveler.photo {
@@ -85,17 +85,17 @@ class TravelerEditViewController : UITableViewController, UINavigationController
       updatedTraveler.photo = travelerImage
     }
     
-    updatedTraveler.primary =  travelerPrimarySwitch.on
+    updatedTraveler.isPrimary =  travelerPrimarySwitch.on
     updatedTraveler.updateTravelerRecordWithUserID(userID)
     sharedModel.saveTraveler(updatedTraveler.record)
     
     //-- Turn off old primary Traveler if there is one
-    if updatedTraveler.primary {
+    if updatedTraveler.isPrimary {
       if let primaryIndex = sharedModel.isPrimaryTraveler() {
         let primaryTraveler = sharedModel.travelers[primaryIndex]
         if primaryTraveler !== updatedTraveler {
           primaryTraveler.record["Primary"] = 0
-          primaryTraveler.primary = false
+          primaryTraveler.isPrimary = false
           sharedModel.saveTraveler(primaryTraveler.record)
         }
       }

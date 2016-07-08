@@ -177,7 +177,7 @@ class Model {
     var primaryIdx : Int?
     
     for (idx, traveler) in travelers.enumerate() {
-      if traveler.primary {
+      if traveler.isPrimary {
         primaryIdx = idx
         break
       }

@@ -197,7 +197,7 @@ extension TravelersViewController : UITableViewDataSource {
       let newTraveler = Traveler(record: record)
       newTraveler.name = "Unnamed Traveler"
       newTraveler.photo = UIImage(named: Traveler.UnknownPhotoName)
-      newTraveler.primary = sharedModel.travelers.isEmpty ? true : false
+      newTraveler.isPrimary = sharedModel.travelers.isEmpty ? true : false
       
       sharedModel.travelers.append(newTraveler)
       tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
