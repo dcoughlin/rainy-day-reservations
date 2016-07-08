@@ -69,7 +69,7 @@ class BookFlightViewController: UIViewController {
       self.isPrimaryTraveler = true
       
       self.sharedModel.travelers[primaryIndex].fetchPhoto {
-        image in
+        [unowned self] image in
         // All UI must be on the main thread
         dispatch_async(dispatch_get_main_queue()) {
           self.primaryTravelerImageView.circleWithBorderWidth(0.75)
@@ -163,7 +163,9 @@ class BookFlightViewController: UIViewController {
   
   func stopActivityIndicator() {
     if self.isAnimatingActivity {
-      self.activityView?.stopAnimating()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.activityView?.stopAnimating()
+      }
       self.isAnimatingActivity = false
     }
   }
@@ -177,19 +179,27 @@ extension BookFlightViewController : ModelDelegate {
     print("Model updated(Book): \(modelType)")
     switch modelType {
     case .Traveler:
-      self.setPrimaryTraveler()
-      self.tableView.reloadData()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.setPrimaryTraveler()
+        self.tableView.reloadData()
+      }
     case .Flight:
       if sharedModel.flights.isEmpty {
         self.stopActivityIndicator()
-        showNoFlightsAlert()
+        dispatch_async(dispatch_get_main_queue()) {
+          self.showNoFlightsAlert()
+        }
       } else {
-        self.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue()) {
+          self.tableView.reloadData()
+        }
         self.stopActivityIndicator()
       }
     case .Reservation:
       self.stopActivityIndicator()
-      showReservationBookedAlert()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.showReservationBookedAlert()
+      }
     }
   }
   

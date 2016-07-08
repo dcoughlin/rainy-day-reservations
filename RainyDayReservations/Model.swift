@@ -70,9 +70,7 @@ class Model {
     publicDB.performQuery(query, inZoneWithID: nil) { results, error in
       if error != nil {
         print("Error fetching Traveler: \(error?.localizedDescription ?? "No description")")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         self.travelers.removeAll(keepCapacity: true)
         for record in results! {
@@ -80,9 +78,7 @@ class Model {
           self.travelers.append(traveler)
           print("Traveler fetched: \(record.recordID.recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Traveler(mode: .Read))
-        }
+        self.delegate?.didUpdateModel(.Traveler(mode: .Read))
       }
     }
   }
@@ -103,9 +99,7 @@ class Model {
       var resultsArray = NSArray()
       if error != nil {
         print("Error deleting all travelers: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         resultsArray = results! as NSArray
         for record in resultsArray {
@@ -121,16 +115,12 @@ class Model {
       record, error in
       if error != nil {
         print("Error saving Traveler: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let recordName = record?.recordID.recordName {
           print("Traveler saved: \(recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Traveler(mode: .Create))
-        }
+        self.delegate?.didUpdateModel(.Traveler(mode: .Create))
       }
     }
   }
@@ -140,16 +130,12 @@ class Model {
       recordID, error in
       if error != nil {
         print("Error deleting Traveler: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let recordName = recordID?.recordName {
           print("Traveler deleted: \(recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Traveler(mode: .Delete))
-        }
+        self.delegate?.didUpdateModel(.Traveler(mode: .Delete))
       }
     }
   }
@@ -159,16 +145,12 @@ class Model {
       record, error in
       if error != nil {
         print("Error fetching Traveler: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let recordName = record?.recordID.recordName {
           print("Reservation Traveler fetched: \(recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Traveler(mode: .Read))
-        }
+        self.delegate?.didUpdateModel(.Traveler(mode: .Read))
       }
     }
   }
@@ -178,9 +160,7 @@ class Model {
       record, error in
       if error != nil {
         print("Error fetching Reservation Traveler: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let record = record {
           let recordName = record.recordID.recordName
@@ -188,9 +168,7 @@ class Model {
           traveler = Traveler(record: record)
           print(traveler?.description)
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Traveler(mode: .Read))
-        }
+        self.delegate?.didUpdateModel(.Traveler(mode: .Read))
       }
     }
   }
@@ -229,9 +207,7 @@ class Model {
     publicDB.performQuery(query, inZoneWithID: nil) { results, error in
       if error != nil {
         print("Error fetching Flight: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         self.flights.removeAll(keepCapacity: true)
         for record in results! {
@@ -239,9 +215,7 @@ class Model {
           self.flights.append(flight)
           print("Flight fetched: \(record.recordID.recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Flight)
-        }
+        self.delegate?.didUpdateModel(.Flight)
       }
     }
   }
@@ -251,16 +225,12 @@ class Model {
       recordID, error in
       if error != nil {
         print("Error deleting Flight: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let recordName = recordID?.recordName {
           print("Flight deleted: \(recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Flight)
-        }
+        self.delegate?.didUpdateModel(.Flight)
       }
     }
   }
@@ -270,16 +240,12 @@ class Model {
       record, error in
       if error != nil {
         print("Error saving Flight: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let recordName = record?.recordID.recordName {
           print("Flight saved: \(recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Flight)
-        }
+        self.delegate?.didUpdateModel(.Flight)
       }
     }
   }
@@ -296,9 +262,7 @@ class Model {
       var resultsArray = NSArray()
       if error != nil {
         print("Error deleting all flights: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         resultsArray = results! as NSArray
         for record in resultsArray {
@@ -359,9 +323,7 @@ class Model {
     publicDB.performQuery(query, inZoneWithID: nil) { results, error in
       if error != nil {
         print("Error fetching reservations: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         self.reservations.removeAll(keepCapacity: true)
         for record in results! {
@@ -369,9 +331,7 @@ class Model {
           self.reservations.append(reservation)
           print("Reservation fetched: \(record.recordID.recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Reservation(mode: .Read))
-        }
+        self.delegate?.didUpdateModel(.Reservation(mode: .Read))
       }
     }
   }
@@ -396,16 +356,12 @@ class Model {
       record, error in
       if error != nil {
         print("Error saving Reservation: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let recordName = record?.recordID.recordName {
           print("Reservation saved: \(recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Reservation(mode: .Create))
-        }
+        self.delegate?.didUpdateModel(.Reservation(mode: .Create))
       }
     }
   }
@@ -415,16 +371,12 @@ class Model {
       recordID, error in
       if error != nil {
         print("Error deleting Reservation: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         if let recordName = recordID?.recordName {
           print("Reservation deleted: \(recordName)")
         }
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateModel(.Reservation(mode: .Delete))
-        }
+        self.delegate?.didUpdateModel(.Reservation(mode: .Delete))
       }
     }
   }
@@ -445,9 +397,7 @@ class Model {
       var resultsArray = NSArray()
       if error != nil {
         print("Error deleting all reservations: \(error?.localizedDescription)")
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterModelError(error!)
-        }
+        self.delegate?.didEncounterModelError(error!)
       } else {
         resultsArray = results! as NSArray
         for record in resultsArray {
@@ -477,9 +427,7 @@ class Model {
           traveler.updateTravelerRecordWithUserID(tempRecordID)
           self.saveTraveler(traveler.record)
         } else {
-          dispatch_async(dispatch_get_main_queue()) {
-            self.delegate?.didEncounterModelError(error!)
-          }
+          self.delegate?.didEncounterModelError(error!)
         }
       } else {
         print("Traveler record type is defined.")
@@ -496,9 +444,7 @@ class Model {
           print("Creating Reservation record type...")
           self.saveReservation(tempRecordID, flightRecordID: tempRecordID, userRecordID: tempRecordID)
         } else {
-          dispatch_async(dispatch_get_main_queue()) {
-            self.delegate?.didEncounterModelError(error!)
-          }
+          self.delegate?.didEncounterModelError(error!)
         }
       } else {
         print("Reservation record type is defined.")
@@ -516,9 +462,7 @@ class Model {
           print("Creating Flight record type and flights...")
           self.seedFlightsFromPlist("Flights")
         } else {
-          dispatch_async(dispatch_get_main_queue()) {
-            self.delegate?.didEncounterModelError(error!)
-          }
+          self.delegate?.didEncounterModelError(error!)
         }
       } else {
         print("Flight record type is defined and default flights are loaded.")

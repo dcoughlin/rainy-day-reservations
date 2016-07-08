@@ -47,14 +47,10 @@ class User  {
     container.accountStatusWithCompletionHandler() {
       accountStatus, error in
       if error != nil {
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterUserError(error)
-        }
+        self.delegate?.didEncounterUserError(error)
       } else {
         self.iCloudAccountActive = (accountStatus == .Available)
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateUser(.UserStatus)
-        }
+        self.delegate?.didUpdateUser(.UserStatus)
       }
     }
   }
@@ -63,9 +59,7 @@ class User  {
   
   func fetchUserID() {
     if self.userID != nil { //-- this doesn't change so save the network call
-      dispatch_async(dispatch_get_main_queue()) {
-        self.delegate?.didUpdateUser(.UserID)
-      }
+      self.delegate?.didUpdateUser(.UserID)
       return
     }
     
@@ -73,13 +67,9 @@ class User  {
       recordID, error in
       if let userID = recordID {
         self.userID = userID
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didUpdateUser(.UserID)
-        }
+        self.delegate?.didUpdateUser(.UserID)
       } else {
-        dispatch_async(dispatch_get_main_queue()) {
-          self.delegate?.didEncounterUserError(error)
-        }
+        self.delegate?.didEncounterUserError(error)
       }
     }
   }

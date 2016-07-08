@@ -74,7 +74,9 @@ class TravelersViewController: UIViewController {
   
   func stopActivityIndicator() {
     if self.isAnimatingActivity {
-      self.activityView?.stopAnimating()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.activityView?.stopAnimating()
+      }
       self.isAnimatingActivity = false
     }
   }
@@ -88,9 +90,13 @@ extension TravelersViewController : ModelDelegate {
     print("Model updated(Travelers): \(modelType)")
     self.stopActivityIndicator()
     if sharedModel.travelers.isEmpty {
-      setEditing(true, animated: true)
+      dispatch_async(dispatch_get_main_queue()) {
+        self.setEditing(true, animated: true)
+      }
     } else {
-      self.tableView.reloadData()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.tableView.reloadData()
+      }
     }
   }
   

@@ -135,7 +135,9 @@ class MasterViewController: UIViewController, UIGestureRecognizerDelegate {
   
   func stopActivityIndicator() {
     if self.isAnimatingActivity {
-      self.activityView?.stopAnimating()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.activityView?.stopAnimating()
+      }
       self.isAnimatingActivity = false
     }
   }
@@ -205,7 +207,9 @@ extension MasterViewController : UserDelegate {
           self.loginContext = .NotLoggedIn
         }
         
-        self.updateMemeberStatusDisplay()
+        dispatch_async(dispatch_get_main_queue()) {
+          self.updateMemeberStatusDisplay()
+        }
       }
     }
   }
@@ -214,7 +218,9 @@ extension MasterViewController : UserDelegate {
     showError(error, inController: nil)
     self.loginContext = .NotLoggedIn
     self.loginError = true
-    self.updateMemeberStatusDisplay()
+    dispatch_async(dispatch_get_main_queue()) {
+      self.updateMemeberStatusDisplay()
+    }
   }
 }
 

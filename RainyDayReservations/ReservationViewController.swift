@@ -61,7 +61,9 @@ class ReservationViewController: UIViewController {
   
   func stopActivityIndicator() {
     if self.isAnimatingActivity {
-      self.activityView?.stopAnimating()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.activityView?.stopAnimating()
+      }
       self.isAnimatingActivity = false
     }
   }
@@ -91,7 +93,9 @@ extension ReservationViewController : ModelDelegate {
       case .Reservation:
         if sharedModel.reservations.isEmpty {
           stopActivityIndicator()
-          showNoReservationsAlert()
+          dispatch_async(dispatch_get_main_queue()) {
+            self.showNoReservationsAlert()
+          }
         } else {
           if sharedModel.travelers.isEmpty {
             sharedModel.fetchTravelersWithUserID(sharedUser.userID)
@@ -101,7 +105,9 @@ extension ReservationViewController : ModelDelegate {
               sharedModel.fetchFlights()
             } else {
               reservationFlights = sharedModel.reservations.map { sharedModel.flightWithReference($0.flightRef!) }
-              self.tableView.reloadData()
+              dispatch_async(dispatch_get_main_queue()) {
+                self.tableView.reloadData()
+              }
               self.stopActivityIndicator()
             }
           }
@@ -112,12 +118,16 @@ extension ReservationViewController : ModelDelegate {
         sharedModel.fetchFlights()
       } else {
         reservationFlights = sharedModel.reservations.map { sharedModel.flightWithReference($0.flightRef!) }
-        self.tableView.reloadData()
+        dispatch_async(dispatch_get_main_queue()) {
+          self.tableView.reloadData()
+        }
         stopActivityIndicator()
       }
     case .Flight:
       reservationFlights = sharedModel.reservations.map { sharedModel.flightWithReference($0.flightRef!) }
-      self.tableView.reloadData()
+      dispatch_async(dispatch_get_main_queue()) {
+        self.tableView.reloadData()
+      }
       self.stopActivityIndicator()
     }
   }
