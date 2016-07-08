@@ -63,7 +63,7 @@ class BookFlightViewController: UIViewController {
   }
   
   func setPrimaryTraveler() {
-    if let primaryIndex = self.sharedModel.isPrimaryTraveler() {
+    if let primaryIndex = self.sharedModel.isPrimaryTraveler(nil) {
       self.primaryTravelerLabel.text = "\(self.sharedModel.travelers[primaryIndex].name)"
       self.primaryTravelerIndex = primaryIndex
       self.isPrimaryTraveler = true

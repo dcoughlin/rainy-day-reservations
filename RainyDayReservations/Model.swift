@@ -53,6 +53,8 @@ class Model {
     self.publicDB = container.publicCloudDatabase
     self.privateDB = container.privateCloudDatabase
   }
+  
+  // MARK: Traveler 
     
   func fetchTravelersWithUserID(userID: CKRecordID?) {
     guard let userID = userID else {
@@ -173,10 +175,13 @@ class Model {
     }
   }
   
-  func isPrimaryTraveler() -> Int? {
+  func isPrimaryTraveler(skipIdx: Int?) -> Int? {
     var primaryIdx : Int?
     
     for (idx, traveler) in travelers.enumerate() {
+      if let skipIdx = skipIdx where skipIdx == idx {
+        continue
+      }
       if traveler.isPrimary {
         primaryIdx = idx
         break

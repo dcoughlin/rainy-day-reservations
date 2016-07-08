@@ -48,6 +48,7 @@ class TravelersViewController: UIViewController {
       if let indexPath = tableView.indexPathForSelectedRow {
         let traveler = sharedModel.travelers[indexPath.row]
         editViewController?.traveler = traveler
+        editViewController?.travelerIdx = indexPath.row
       }
     }
   }

@@ -20,7 +20,8 @@ class TravelerEditViewController : UITableViewController, UINavigationController
   var sharedModel = Model.sharedInstance  //-- Leave the delegate set to the parent view controller
   var sharedUser = User.sharedInstance
   
-  var traveler : Traveler?
+  var traveler: Traveler?
+  var travelerIdx: Int?
   
   var saveLeftButtonItem: UIBarButtonItem?
   var saveRightButtonItem: UIBarButtonItem?
@@ -91,7 +92,7 @@ class TravelerEditViewController : UITableViewController, UINavigationController
     
     //-- Turn off old primary Traveler if there is one
     if updatedTraveler.isPrimary {
-      if let primaryIndex = sharedModel.isPrimaryTraveler() {
+      if let primaryIndex = sharedModel.isPrimaryTraveler(travelerIdx) {
         let primaryTraveler = sharedModel.travelers[primaryIndex]
         if primaryTraveler !== updatedTraveler {
           primaryTraveler.record["Primary"] = 0
